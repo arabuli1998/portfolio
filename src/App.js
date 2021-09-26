@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/Navbar";
+import { BrowserRouter as Router } from "react-router-dom";
+import GlobalStyle from './globalStyles';
+import Hero from "./components/Hero";
+import { SliderData } from "./data/SliderData";
+import DropBar from "./components/DropBar";
+import { useState } from "react";
+import Information from "./components/Information";
+import { InformationData } from "./data/InformationData";
 
 function App() {
+
+  const [open, setOpen] = useState(false);
+  const view = () => {
+    setOpen(!open)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <>
+      <GlobalStyle/>
+    
+        <Navbar view={view} />
+        <DropBar open={open} view={view}/>
+        <Hero slides={SliderData} />
+        <Information {...InformationData}/>
+      </>
+      </Router>
   );
 }
 
